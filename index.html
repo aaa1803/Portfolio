@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="김지우 - 사회복지사 블로그 & 포트폴리오">
+    <title>김지우의 이야기 | 사회복지사 블로그</title>
+    <!-- Google Fonts: 감성 명조(Noto Serif KR), 손글씨 액센트(Caveat), 본문(Noto Sans KR, Plus Jakarta Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Noto+Serif+KR:wght@400;500;600;700;900&family=Noto+Sans+KR:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 수채화 앰비언트 배경 워시 & 종이 질감 캔버스 오버레이 -->
+    <div class="watercolor-bg-elements" aria-hidden="true">
+        <div class="wash-blob wash-blob-1"></div>
+        <div class="wash-blob wash-blob-2"></div>
+        <div class="wash-blob wash-blob-3"></div>
+        <div class="wash-blob wash-blob-4"></div>
+        <div class="wash-blob wash-blob-5"></div>
+    </div>
+    <div class="paper-texture-overlay" aria-hidden="true"></div>
+
+    <!-- 상단 네비게이션 헤더 -->
+    <header class="blog-header">
+        <div class="header-inner">
+            <a href="#" class="blog-brand">
+                <span class="brand-badge">Blog</span>
+                <span class="brand-title">지우의 따뜻한 기록</span>
+            </a>
+            <nav class="blog-nav" aria-label="메인 메뉴">
+                <a href="#about" class="nav-link active">소개</a>
+                <a href="#welfare" class="nav-link">사회복지</a>
+                <a href="#travel" class="nav-link">여행</a>
+                <a href="#education" class="nav-link">교육</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="layout-container">
+        <!-- 프로필 헤로 섹션 (블로그 상단 프로필 배너) -->
+        <section class="profile-hero" id="about">
+            <div class="hero-card">
+                <div class="hero-avatar-wrap">
+                    <div class="avatar" role="img" aria-label="김지우 프로필 아바타">🤝</div>
+                </div>
+                <div class="hero-content">
+                    <span class="role-chip">사회복지사</span>
+                    <h1 class="profile-name">김지우</h1>
+                    <p class="profile-bio">
+                        사람과 사람을 잇고, 온기를 나누는 사회복지사 김지우입니다.<br>
+                        지역사회 복지 실천, 쉼과 영감을 주는 여행, 그리고 지속적인 배움의 여정을 기록합니다.
+                    </p>
+                    <div class="hero-tags">
+                        <span class="tag">#사회복지사</span>
+                        <span class="tag">#맞춤형사례관리</span>
+                        <span class="tag">#여행기록</span>
+                        <span class="tag">#평생교육</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 메인 콘텐츠 영역: 2단 블로그 구조 (왼쪽: 관심항목 사이드바, 오른쪽: 피드) -->
+        <main class="main-content">
+            <!-- 왼쪽 블로그 사이드바 (관심 항목 & 프로필 위젯) -->
+            <aside class="blog-sidebar" aria-label="사이드바 관심 항목">
+                <div class="sidebar-widget">
+                    <h3 class="widget-title">프로필 정보</h3>
+                    <div class="widget-profile">
+                        <div class="mini-avatar">🤝</div>
+                        <div class="mini-info">
+                            <strong>김지우</strong>
+                            <p>사회복지사 (Social Worker)</p>
+                        </div>
+                    </div>
+                    <p class="widget-desc">
+                        따뜻한 마음과 전문성을 바탕으로 사람 중심의 가치를 실천합니다.
+                    </p>
+                </div>
+
+                <div class="sidebar-widget">
+                    <h3 class="widget-title">관심 항목</h3>
+                    <ul class="category-list">
+                        <!-- 사회복지사 (4가지 세부 항목 트리) -->
+                        <li class="category-tree open">
+                            <div class="tree-header">
+                                <a href="#welfare" class="cat-link" id="welfareMainCatLink">
+                                    <span class="cat-icon">💙</span>
+                                    <span class="cat-name">사회복지사</span>
+                                </a>
+                                <span class="cat-count">4</span>
+                            </div>
+                            <ul class="sub-category-list" id="welfareSubCategories">
+                                <li>
+                                    <button type="button" class="sub-cat-btn" data-exp-id="exp-planning">
+                                        <span class="sub-bullet">📋</span>
+                                        <span class="sub-text">프로그램 기획 및 운영</span>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button type="button" class="sub-cat-btn" data-exp-id="exp-volunteers">
+                                        <span class="sub-bullet">🤝</span>
+                                        <span class="sub-text">자원봉사 및 서포터즈 관리</span>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button type="button" class="sub-cat-btn" data-exp-id="exp-casework">
+                                        <span class="sub-bullet">🏠</span>
+                                        <span class="sub-text">현장 실무 및 사례관리</span>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button type="button" class="sub-cat-btn" data-exp-id="exp-competency">
+                                        <span class="sub-bullet">📈</span>
+                                        <span class="sub-text">전문 역량 성장</span>
+                                    </button>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!-- 여행 항목 -->
+                        <li>
+                            <a href="#travel" class="single-cat-link">
+                                <span class="cat-icon">✈️</span>
+                                <span class="cat-name">여행</span>
+                                <span class="cat-count">1</span>
+                            </a>
+                        </li>
+
+                        <!-- 교육 항목 -->
+                        <li>
+                            <a href="#education" class="single-cat-link">
+                                <span class="cat-icon">📚</span>
+                                <span class="cat-name">교육</span>
+                                <span class="cat-count">1</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+
+            <!-- 블로그 포스트 피드 (오른쪽 본문) -->
+            <div class="posts-feed">
+                <div class="section-heading">
+                    <h2 class="feed-title">카테고리별 이야기</h2>
+                    <span class="feed-subtitle">사회복지사 실천 경험, 여행, 교육에 관한 기록들</span>
+                </div>
+
+                <!-- 1. 사회복지사 항목 포스트 & 4대 실천 경험 갤러리 -->
+                <article class="post-card post-welfare" id="welfare">
+                    <div class="post-header">
+                        <span class="category-badge category-blue">사회복지사</span>
+                        <time class="post-date">2026. 10. 12</time>
+                    </div>
+                    <h3 class="post-title">따뜻한 연결, 현장에서 실천한 4가지 경험 갤러리</h3>
+                    <p class="post-excerpt">
+                        복지는 서로의 존엄을 지키고 자립을 돕는 일입니다. 지역사회 현장에서 주도적으로 수행해온 4가지 핵심 전문 영역의 경험과 성과를 기록한 갤러리입니다.
+                    </p>
+
+                    <!-- 경험 갤러리 필터 탭 -->
+                    <div class="welfare-tabs" role="tablist" aria-label="사회복지사 경험 필터">
+                        <button type="button" class="tab-btn active" data-filter="all">전체 경험 (4)</button>
+                        <button type="button" class="tab-btn" data-filter="exp-planning">📋 기획·운영</button>
+                        <button type="button" class="tab-btn" data-filter="exp-volunteers">🤝 봉사·서포터즈</button>
+                        <button type="button" class="tab-btn" data-filter="exp-casework">🏠 실무·사례관리</button>
+                        <button type="button" class="tab-btn" data-filter="exp-competency">📈 전문 역량</button>
+                    </div>
+
+                    <!-- 4대 경험 갤러리 카드 그리드 -->
+                    <div class="experience-gallery-grid">
+                        <!-- 경험 1: 프로그램 기획 및 운영 -->
+                        <div class="exp-card" id="exp-planning" data-category="exp-planning" tabindex="0">
+                            <div class="exp-card-header">
+                                <div class="exp-icon-wrap bg-blue">📋</div>
+                                <span class="exp-badge">기획 &amp; 운영</span>
+                            </div>
+                            <h4 class="exp-title">프로그램 기획 및 운영</h4>
+                            <p class="exp-summary">
+                                지역사회 주민의 복지 수요 조사를 바탕으로 맞춤형 프로그램을 기획하고, 연간 운영 및 성과 분석을 총괄했습니다.
+                            </p>
+                            <ul class="exp-highlights">
+                                <li><strong>수요 기반 8개 신규 특화 프로그램 기획:</strong> 아동 문화교실 &amp; 어르신 디지털 리터러시</li>
+                                <li><strong>만족도 94.8% 달성:</strong> 피드백 환류 체계 구축으로 지속적 참여율 증대</li>
+                                <li><strong>공모사업 선정:</strong> 지자체 주민참여 예산 2,500만 원 확보 및 투명한 집행</li>
+                            </ul>
+                            <div class="exp-card-footer">
+                                <button type="button" class="exp-view-btn" data-exp-target="exp-planning">
+                                    경험 상세 보기 <span>→</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- 경험 2: 자원봉사 및 서포터즈 관리 -->
+                        <div class="exp-card" id="exp-volunteers" data-category="exp-volunteers" tabindex="0">
+                            <div class="exp-card-header">
+                                <div class="exp-icon-wrap bg-sky">🤝</div>
+                                <span class="exp-badge">봉사 &amp; 서포터즈</span>
+                            </div>
+                            <h4 class="exp-title">자원봉사 및 서포터즈 관리</h4>
+                            <p class="exp-summary">
+                                150여 명의 자원봉사자 인력풀을 체계적으로 조직화하고, 대학생 청년 서포터즈를 양성하여 복지 가치를 확산했습니다.
+                            </p>
+                            <ul class="exp-highlights">
+                                <li><strong>맞춤 매칭 DB 구축:</strong> 개인 역량·시간별 맞춤 배치로 봉사 지속률 35% 증대</li>
+                                <li><strong>청년 서포터즈 양성:</strong> 카드뉴스 및 현장 인터뷰 콘텐츠 제작으로 지역 홍보 활성화</li>
+                                <li><strong>감사 세레머니 정례화:</strong> 우수 봉사자 표창 및 활동 수기집 발간</li>
+                            </ul>
+                            <div class="exp-card-footer">
+                                <button type="button" class="exp-view-btn" data-exp-target="exp-volunteers">
+                                    경험 상세 보기 <span>→</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- 경험 3: 현장 실무 및 사례관리 -->
+                        <div class="exp-card" id="exp-casework" data-category="exp-casework" tabindex="0">
+                            <div class="exp-card-header">
+                                <div class="exp-icon-wrap bg-indigo">🏠</div>
+                                <span class="exp-badge">현장 &amp; 사례관리</span>
+                            </div>
+                            <h4 class="exp-title">현장 실무 및 사례관리</h4>
+                            <p class="exp-summary">
+                                복지 사각지대 위기가구를 선제적으로 발굴하고, 통합사례관리를 통해 맞춤형 공공·민간 자원을 연계했습니다.
+                            </p>
+                            <ul class="exp-highlights">
+                                <li><strong>50가구 심층 상담:</strong> 초기 욕구 사정부터 목표 수립, 위기 개입 및 사후 모니터링</li>
+                                <li><strong>민·관 솔루션 네트워크:</strong> 주민센터, 의료기관, 복지재단 협력으로 긴급 복지 지원</li>
+                                <li><strong>당사자 자기결정권 존중:</strong> 당사자 중심 자립 계획 실현으로 목표 달성률 85%</li>
+                            </ul>
+                            <div class="exp-card-footer">
+                                <button type="button" class="exp-view-btn" data-exp-target="exp-casework">
+                                    경험 상세 보기 <span>→</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- 경험 4: 전문 역량 성장 -->
+                        <div class="exp-card" id="exp-competency" data-category="exp-competency" tabindex="0">
+                            <div class="exp-card-header">
+                                <div class="exp-icon-wrap bg-teal">📈</div>
+                                <span class="exp-badge">전문 역량 성장</span>
+                            </div>
+                            <h4 class="exp-title">전문 역량 성장</h4>
+                            <p class="exp-summary">
+                                보다 전문성 있는 실천을 위해 사례관리 슈퍼비전, 상담 스킬, 최신 복지 정책 세미나를 지속 이수했습니다.
+                            </p>
+                            <ul class="exp-highlights">
+                                <li><strong>전문 과정 60시간 이수:</strong> 통합사례관리 심화과정 및 위기 개입 상담 워크숍 수료</li>
+                                <li><strong>동료 스터디 리딩:</strong> 최신 복지 정책 및 현장 실천 사례 공유 스터디 운영</li>
+                                <li><strong>인권 기반 실천:</strong> 당사자 인권 옹호 및 윤리 실천 가이드라인 체화</li>
+                            </ul>
+                            <div class="exp-card-footer">
+                                <button type="button" class="exp-view-btn" data-exp-target="exp-competency">
+                                    경험 상세 보기 <span>→</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="post-footer">
+                        <span class="read-tag">💙 4대 핵심 역량 갤러리</span>
+                        <span class="post-stat">사회복지사 실천 기록 #1</span>
+                    </div>
+                </article>
+
+                <!-- 2. 여행 항목 포스트 -->
+                <article class="post-card post-travel" id="travel">
+                    <div class="post-header">
+                        <span class="category-badge category-sky">여행</span>
+                        <time class="post-date">2026. 09. 28</time>
+                    </div>
+                    <h3 class="post-title">낯선 길 위에서 만나는 쉼과 새로운 시선</h3>
+                    <p class="post-excerpt">
+                        반복되는 일상에서 벗어나 새로운 풍경과 마주할 때, 마음의 여유와 또 다른 배움을 얻습니다. 
+                        푸른 바다와 고즈넉한 골목길을 걸으며 사람들의 다양한 삶의 모습을 관찰하고, 
+                        다시 힘차게 나아갈 긍정의 에너지를 충전합니다.
+                    </p>
+
+                    <!-- 여행 사진 토글 버튼 -->
+                    <div class="photo-action-area">
+                        <button type="button" class="photo-toggle-btn" id="toggleTravelPhotos" aria-expanded="false" aria-controls="travelGallery">
+                            <span class="btn-icon">📸</span>
+                            <span class="btn-label">여행 사진 보기 (자료 3장)</span>
+                            <span class="btn-arrow" aria-hidden="true">▼</span>
+                        </button>
+                    </div>
+
+                    <!-- 자료 사진 갤러리 영역 -->
+                    <div class="travel-gallery" id="travelGallery" hidden>
+                        <p class="gallery-info">💡 사진을 클릭하면 크게 볼 수 있습니다.</p>
+                        <div class="gallery-grid">
+                            <figure class="gallery-card" data-src="../자료/괌.jpg" data-title="🌴 괌 (Guam)" data-desc="에메랄드빛 투명한 바다와 여유로운 휴식이 머무는 섬">
+                                <div class="img-container">
+                                    <img src="../자료/괌.jpg" alt="괌 여행 사진" loading="lazy">
+                                    <span class="zoom-badge">확대 🔍</span>
+                                </div>
+                                <figcaption>
+                                    <strong class="place-name">괌 (Guam)</strong>
+                                    <span class="place-sub">푸른 바다와 휴식</span>
+                                </figcaption>
+                            </figure>
+
+                            <figure class="gallery-card" data-src="../자료/베트남.jpg" data-title="🏮 베트남 (Vietnam)" data-desc="이국적인 정취와 활기찬 에너지가 가득한 골목길">
+                                <div class="img-container">
+                                    <img src="../자료/베트남.jpg" alt="베트남 여행 사진" loading="lazy">
+                                    <span class="zoom-badge">확대 🔍</span>
+                                </div>
+                                <figcaption>
+                                    <strong class="place-name">베트남 (Vietnam)</strong>
+                                    <span class="place-sub">이국적인 정취와 활기</span>
+                                </figcaption>
+                            </figure>
+
+                            <figure class="gallery-card" data-src="../자료/영국.jpg" data-title="🏰 영국 (United Kingdom)" data-desc="클래식한 건축미와 깊은 역사가 숨쉬는 거리">
+                                <div class="img-container">
+                                    <img src="../자료/영국.jpg" alt="영국 여행 사진" loading="lazy">
+                                    <span class="zoom-badge">확대 🔍</span>
+                                </div>
+                                <figcaption>
+                                    <strong class="place-name">영국 (United Kingdom)</strong>
+                                    <span class="place-sub">역사와 문화의 숨결</span>
+                                </figcaption>
+                            </figure>
+                        </div>
+                    </div>
+
+                    <div class="post-footer">
+                        <span class="read-tag">✈️ 쉼과 여정</span>
+                        <span class="post-stat">여행 에세이 #2</span>
+                    </div>
+                </article>
+
+                <!-- 3. 교육 항목 포스트 -->
+                <article class="post-card" id="education">
+                    <div class="post-header">
+                        <span class="category-badge category-teal">교육</span>
+                        <time class="post-date">2026. 09. 15</time>
+                    </div>
+                    <h3 class="post-title">배움은 끝이 없다: 전문성과 성장을 위한 교육</h3>
+                    <p class="post-excerpt">
+                        더 나은 실천을 위해서는 끊임없이 배우고 탐구해야 합니다. 
+                        사회복지 상담 기법, 지역사회 조직화 워크숍, 권리 중심 실천 교육에 지속적으로 참여하며 
+                        이론과 현장을 잇는 전문 복지 전문가로서 성장을 이어가고 있습니다.
+                    </p>
+                    <div class="post-footer">
+                        <span class="read-tag">📚 역량 강화</span>
+                        <span class="post-stat">배움 일지 #3</span>
+                    </div>
+                </article>
+            </div>
+        </main>
+    </div>
+
+    <!-- 푸터 -->
+    <footer class="blog-footer">
+        <p>&copy; 2026 김지우. 따뜻한 사회복지사의 블로그. All rights reserved.</p>
+    </footer>
+
+    <!-- 여행 사진 라이트박스 모달 -->
+    <div class="photo-modal" id="photoModal" aria-hidden="true" role="dialog" aria-label="사진 상세 보기">
+        <div class="modal-overlay" id="modalOverlay"></div>
+        <div class="modal-dialog">
+            <button type="button" class="modal-close-btn" id="modalCloseBtn" aria-label="사진 닫기">✕</button>
+            <div class="modal-image-wrapper">
+                <img src="" alt="" id="modalImage" class="modal-image">
+            </div>
+            <div class="modal-info">
+                <h4 id="modalTitle" class="modal-title"></h4>
+                <p id="modalDesc" class="modal-desc"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 사회복지사 경험 상세 모달 -->
+    <div class="exp-modal" id="experienceModal" aria-hidden="true" role="dialog" aria-label="사회복지사 경험 상세 보기">
+        <div class="modal-overlay" id="expModalOverlay"></div>
+        <div class="modal-dialog exp-dialog">
+            <button type="button" class="modal-close-btn" id="expModalCloseBtn" aria-label="닫기">✕</button>
+            <div class="exp-modal-header">
+                <div class="exp-modal-icon-wrap" id="expModalIcon">📋</div>
+                <div>
+                    <span class="exp-modal-badge" id="expModalBadge">기획 및 운영</span>
+                    <h3 class="exp-modal-title" id="expModalTitle">프로그램 기획 및 운영</h3>
+                </div>
+            </div>
+            <div class="exp-modal-body">
+                <div class="exp-modal-section">
+                    <h5 class="exp-modal-heading">🎯 역할 및 핵심 개요</h5>
+                    <p id="expModalRole" class="exp-modal-desc"></p>
+                </div>
+                <div class="exp-modal-section">
+                    <h5 class="exp-modal-heading">✨ 주요 추진 실적 및 성과</h5>
+                    <ul id="expModalList" class="exp-modal-list"></ul>
+                </div>
+                <div class="exp-modal-section exp-review-box">
+                    <h5 class="exp-modal-heading">💡 실천을 통해 얻은 배움과 지향 가치</h5>
+                    <p id="expModalInsight" class="exp-modal-desc"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>

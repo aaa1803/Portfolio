@@ -1,0 +1,1643 @@
+/* ==========================================================================
+   Watercolor Style UI Design System (수채화 감성 디자인 시스템)
+   - Texture: Cold-press Watercolor Paper (미색 캔버스 종이 결 & 미세 섬유 입자)
+   - Bleeding Edges: Soft organic morphing curves & diffused pigment washes
+   - Pastel Palette: Translucent glaze layering (mix-blend-mode: multiply)
+   - Typography: Elegant Korean Serif ('Noto Serif KR') & Sumi/Indigo Ink tones
+   ========================================================================== */
+
+:root {
+    /* --- Base Watercolor Paper Colors --- */
+    --paper-base: #fdfbf7;
+    --paper-warm: #f7f3eb;
+    --paper-cream: #faf6ef;
+    --paper-tint: rgba(253, 251, 247, 0.82);
+
+    /* --- Payne's Grey & Sumi Ink Text Colors (따뜻하고 깊이 있는 수채화 잉크 톤) --- */
+    --ink-dark: #2c333e;
+    --ink-main: #3e4856;
+    --ink-muted: #5e6b7d;
+    --ink-soft: #8493a6;
+    --ink-line: rgba(160, 145, 135, 0.3);
+    --ink-border-light: rgba(195, 182, 172, 0.4);
+
+    /* --- Pastel Pigment Palette (맑은 파스텔 수채화 물감 팔레트) --- */
+    /* 1. Misty Cornflower / Sky (차분한 하늘빛 워시) */
+    --wash-sky: #daf0fd;
+    --wash-sky-glow: rgba(175, 215, 248, 0.5);
+    --pigment-sky: #4b8bc7;
+    --tint-sky: rgba(180, 220, 250, 0.28);
+
+    /* 2. Petal Peach & Coral (포근한 복숭앗빛 장미 워시) */
+    --wash-peach: #ffe6de;
+    --wash-peach-glow: rgba(255, 200, 185, 0.5);
+    --pigment-peach: #db6a5a;
+    --tint-peach: rgba(255, 210, 198, 0.28);
+
+    /* 3. Lilac Mist & Lavender (은은한 라벤더 보랏빛 워시) */
+    --wash-lavender: #ece2fb;
+    --wash-lavender-glow: rgba(215, 195, 245, 0.5);
+    --pigment-lavender: #8a64be;
+    --tint-lavender: rgba(225, 205, 250, 0.28);
+
+    /* 4. Sage & Mint (싱그러운 쑥빛 세이지 그린 워시) */
+    --wash-sage: #def2e5;
+    --wash-sage-glow: rgba(185, 225, 200, 0.5);
+    --pigment-sage: #4e8c68;
+    --tint-sage: rgba(190, 230, 205, 0.28);
+
+    /* 5. Butter Warmth (따사로운 햇살 버터 옐로우 워시) */
+    --wash-butter: #fff1cc;
+    --wash-butter-glow: rgba(255, 230, 160, 0.5);
+    --pigment-butter: #b38622;
+    --tint-butter: rgba(255, 235, 175, 0.32);
+
+    /* --- Bleeding Shadows & Water Penumbras (물감 번짐 다중 그림자) --- */
+    --shadow-paper: 0 4px 20px -2px rgba(170, 155, 180, 0.12), 
+                    0 1px 4px rgba(140, 130, 120, 0.08);
+    
+    --shadow-bleeding-card: 
+        0 0 0 1px rgba(215, 202, 192, 0.55),
+        0 8px 32px -4px rgba(175, 160, 195, 0.16),
+        0 2px 12px rgba(255, 215, 205, 0.18),
+        inset 0 0 20px rgba(255, 255, 255, 0.7);
+
+    --shadow-bleeding-hover: 
+        0 0 0 1.5px rgba(175, 155, 195, 0.55),
+        0 14px 40px -4px rgba(160, 145, 190, 0.24),
+        0 4px 18px rgba(190, 220, 255, 0.25),
+        inset 0 0 28px rgba(255, 255, 255, 0.9);
+
+    --shadow-button-glow:
+        0 4px 18px rgba(150, 185, 235, 0.35),
+        0 2px 6px rgba(210, 180, 235, 0.25);
+
+    /* --- Organic Hand-painted Radii (유기적이고 자연스러운 붓선 모서리) --- */
+    --radius-organic-sm: 14px 6px 12px 8px / 6px 12px 8px 14px;
+    --radius-organic-md: 24px 16px 22px 18px / 16px 22px 18px 24px;
+    --radius-organic-lg: 32px 22px 30px 24px / 22px 30px 24px 32px;
+    --radius-pill: 255px 15px 225px 15px / 15px 225px 15px 255px;
+    --radius-pill-alt: 15px 225px 15px 255px / 255px 15px 225px 15px;
+    --radius-full: 9999px;
+
+    /* --- Typography --- */
+    --font-heading: 'Noto Serif KR', -apple-system, serif;
+    --font-body: 'Noto Sans KR', 'Plus Jakarta Sans', -apple-system, sans-serif;
+    --font-accent: 'Caveat', 'Noto Serif KR', cursive;
+
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ==========================================================================
+   Reset & Canvas Setup (수채화 캔버스 베이스)
+   ========================================================================== */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    background-color: var(--paper-base);
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--paper-base);
+    color: var(--ink-main);
+    line-height: 1.68;
+    position: relative;
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    font-family: inherit;
+    background: none;
+    border: none;
+}
+
+/* ==========================================================================
+   1. Textured Watercolor Paper Background (수채화 종이 질감 & 앰비언트 워시)
+   ========================================================================== */
+
+/* SVG 기반 섬세한 콜드프레스 수채화 용지 질감 오버레이 */
+.paper-texture-overlay {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 99;
+    opacity: 0.42;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 600 600' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paperGrain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.035' numOctaves='5' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.88   0 0 0 0 0.84   0 0 0 0 0.80  0 0 0 0.45 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paperGrain)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 320px 320px;
+}
+
+/* 종이 위에 은은하게 번진 수채화 앰비언트 워시 얼룩들 */
+.watercolor-bg-elements {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.wash-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.55;
+    mix-blend-mode: multiply;
+    animation: gentleWashFloat 20s ease-in-out infinite alternate;
+}
+
+/* 좌상단: 은은한 라벤더 보라 워시 */
+.wash-blob-1 {
+    width: 520px;
+    height: 520px;
+    top: -120px;
+    left: -100px;
+    background: radial-gradient(circle, rgba(220, 205, 252, 0.7) 0%, rgba(200, 220, 255, 0.4) 60%, transparent 80%);
+}
+
+/* 우상단: 포근한 복숭아 피치 워시 */
+.wash-blob-2 {
+    width: 600px;
+    height: 600px;
+    top: 60px;
+    right: -150px;
+    background: radial-gradient(circle, rgba(255, 218, 205, 0.65) 0%, rgba(255, 235, 210, 0.35) 60%, transparent 80%);
+    animation-delay: -5s;
+    animation-duration: 24s;
+}
+
+/* 중앙 좌측: 맑은 하늘빛 워시 */
+.wash-blob-3 {
+    width: 480px;
+    height: 480px;
+    top: 45%;
+    left: 5%;
+    background: radial-gradient(circle, rgba(195, 230, 255, 0.6) 0%, rgba(210, 245, 235, 0.35) 60%, transparent 80%);
+    animation-delay: -10s;
+    animation-duration: 22s;
+}
+
+/* 우측 하단: 싱그러운 세이지 그린 워시 */
+.wash-blob-4 {
+    width: 540px;
+    height: 540px;
+    bottom: 5%;
+    right: 5%;
+    background: radial-gradient(circle, rgba(205, 240, 220, 0.65) 0%, rgba(235, 245, 205, 0.4) 60%, transparent 80%);
+    animation-delay: -15s;
+    animation-duration: 26s;
+}
+
+/* 중앙 하단: 따뜻한 버터 옐로우 워시 */
+.wash-blob-5 {
+    width: 440px;
+    height: 440px;
+    bottom: 25%;
+    left: 35%;
+    background: radial-gradient(circle, rgba(255, 242, 195, 0.5) 0%, rgba(255, 225, 210, 0.25) 60%, transparent 80%);
+    animation-delay: -8s;
+    animation-duration: 28s;
+}
+
+@keyframes gentleWashFloat {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+    50% {
+        transform: translate(30px, 20px) scale(1.08);
+    }
+    100% {
+        transform: translate(-20px, 35px) scale(0.96);
+    }
+}
+
+/* ==========================================================================
+   2. Header Navigation (수채화 붓자국 & 반투명 수채 헤더)
+   ========================================================================== */
+.blog-header {
+    background-color: rgba(253, 251, 247, 0.85);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1.5px solid var(--ink-border-light);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 20px -2px rgba(190, 175, 160, 0.12);
+}
+
+.header-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 16px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.blog-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* 수채화 물감 터치 배지 */
+.brand-badge {
+    background: linear-gradient(135deg, rgba(165, 205, 248, 0.9) 0%, rgba(220, 190, 245, 0.9) 100%);
+    color: var(--ink-dark);
+    font-family: var(--font-accent);
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 16px 4px 14px 6px / 6px 14px 4px 16px;
+    letter-spacing: 0.05em;
+    box-shadow: 0 2px 8px rgba(180, 160, 220, 0.3), inset 0 0 6px rgba(255, 255, 255, 0.6);
+    mix-blend-mode: multiply;
+    transition: var(--transition);
+}
+
+.blog-brand:hover .brand-badge {
+    transform: rotate(-3deg) scale(1.05);
+    background: linear-gradient(135deg, rgba(255, 200, 190, 0.9) 0%, rgba(220, 190, 245, 0.9) 100%);
+}
+
+.brand-title {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--ink-dark);
+    letter-spacing: -0.02em;
+}
+
+.blog-nav {
+    display: flex;
+    gap: 8px;
+}
+
+.nav-link {
+    font-family: var(--font-heading);
+    font-size: 0.94rem;
+    font-weight: 500;
+    color: var(--ink-muted);
+    padding: 7px 16px;
+    border-radius: var(--radius-pill);
+    transition: var(--transition);
+    position: relative;
+    border: 1px solid transparent;
+}
+
+.nav-link:hover {
+    color: var(--ink-dark);
+    background-color: var(--wash-sky);
+    border-color: rgba(180, 215, 245, 0.6);
+    box-shadow: 0 2px 10px rgba(180, 215, 245, 0.35);
+    transform: translateY(-1px);
+}
+
+.nav-link.active {
+    background: linear-gradient(135deg, rgba(225, 240, 255, 0.95), rgba(245, 235, 255, 0.95));
+    color: var(--pigment-sky);
+    font-weight: 700;
+    border-color: rgba(175, 210, 245, 0.8);
+    box-shadow: 0 3px 12px rgba(175, 210, 245, 0.4), inset 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+/* ==========================================================================
+   3. Layout Container
+   ========================================================================== */
+.layout-container {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 36px 24px 68px;
+    position: relative;
+    z-index: 1;
+}
+
+/* ==========================================================================
+   4. Profile Hero Section (수채화 캔버스 화폭 스타일 프로필)
+   ========================================================================== */
+.profile-hero {
+    margin-bottom: 44px;
+}
+
+.hero-card {
+    background: rgba(255, 253, 249, 0.82);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: var(--radius-organic-lg);
+    border: 1.5px solid var(--ink-border-light);
+    padding: 36px 40px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    box-shadow: var(--shadow-bleeding-card);
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition);
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(255, 225, 215, 0.45) 0%, transparent 50%),
+        radial-gradient(circle at 90% 80%, rgba(215, 230, 255, 0.45) 0%, transparent 50%);
+}
+
+/* 가장자리 소프트 블리딩 수채화 워시 레이어 */
+.hero-card::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(255, 210, 200, 0.3) 0%, rgba(220, 205, 250, 0.25) 50%, rgba(195, 230, 255, 0.35) 100%);
+    z-index: -1;
+    filter: blur(6px);
+    opacity: 0.7;
+    transition: var(--transition);
+}
+
+.hero-card:hover {
+    box-shadow: var(--shadow-bleeding-hover);
+    transform: translateY(-2px);
+}
+
+.hero-card:hover::before {
+    opacity: 1;
+    filter: blur(10px);
+}
+
+/* 수채화 물방울 형태의 아바타 래퍼 */
+.hero-avatar-wrap {
+    flex-shrink: 0;
+    width: 104px;
+    height: 104px;
+    border-radius: 46% 54% 62% 38% / 42% 48% 52% 58%;
+    background: linear-gradient(135deg, rgba(255, 195, 180, 0.85) 0%, rgba(195, 180, 245, 0.85) 50%, rgba(160, 210, 245, 0.85) 100%);
+    padding: 6px;
+    box-shadow: 0 8px 24px rgba(185, 170, 220, 0.35), inset 0 0 10px rgba(255, 255, 255, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-bounce);
+    animation: organicShapeShift 8s ease-in-out infinite alternate;
+}
+
+@keyframes organicShapeShift {
+    0% {
+        border-radius: 46% 54% 62% 38% / 42% 48% 52% 58%;
+    }
+    50% {
+        border-radius: 58% 42% 45% 55% / 54% 58% 42% 46%;
+    }
+    100% {
+        border-radius: 42% 58% 52% 48% / 48% 42% 58% 52%;
+    }
+}
+
+.avatar {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 254, 252, 0.94);
+    border-radius: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 46px;
+    user-select: none;
+    transition: var(--transition);
+    box-shadow: inset 0 2px 8px rgba(190, 175, 160, 0.2);
+}
+
+.hero-card:hover .hero-avatar-wrap {
+    transform: scale(1.06) rotate(4deg);
+}
+
+.hero-content {
+    flex: 1;
+}
+
+/* 수채화 붓터치 롤 칩 */
+.role-chip {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: var(--pigment-sky);
+    background-color: var(--wash-sky);
+    border: 1px solid rgba(175, 210, 245, 0.7);
+    padding: 4px 14px;
+    border-radius: var(--radius-pill);
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+    box-shadow: 0 2px 6px rgba(180, 215, 245, 0.25);
+    mix-blend-mode: multiply;
+}
+
+.profile-name {
+    font-family: var(--font-heading);
+    font-size: 2.1rem;
+    font-weight: 700;
+    color: var(--ink-dark);
+    margin-bottom: 10px;
+    letter-spacing: -0.03em;
+    line-height: 1.25;
+}
+
+.profile-bio {
+    font-size: 1rem;
+    color: var(--ink-muted);
+    line-height: 1.7;
+    margin-bottom: 18px;
+    word-break: keep-all;
+}
+
+.hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* 파스텔 수채화 태그 */
+.tag {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--ink-main);
+    background: rgba(255, 255, 255, 0.75);
+    border: 1px solid var(--ink-border-light);
+    padding: 4px 12px;
+    border-radius: var(--radius-organic-sm);
+    transition: var(--transition);
+    backdrop-filter: blur(4px);
+}
+
+.tag:nth-child(1) {
+    background-color: var(--wash-sky);
+    color: var(--pigment-sky);
+    border-color: rgba(180, 215, 245, 0.7);
+}
+
+.tag:nth-child(2) {
+    background-color: var(--wash-peach);
+    color: var(--pigment-peach);
+    border-color: rgba(255, 205, 195, 0.7);
+}
+
+.tag:nth-child(3) {
+    background-color: var(--wash-lavender);
+    color: var(--pigment-lavender);
+    border-color: rgba(220, 200, 245, 0.7);
+}
+
+.tag:nth-child(4) {
+    background-color: var(--wash-sage);
+    color: var(--pigment-sage);
+    border-color: rgba(190, 230, 205, 0.7);
+}
+
+.tag:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(180, 165, 195, 0.2);
+}
+
+/* ==========================================================================
+   5. Main Blog Layout (2단 구조)
+   ========================================================================== */
+.main-content {
+    display: grid;
+    grid-template-columns: 290px 1fr;
+    gap: 32px;
+    align-items: start;
+}
+
+/* ==========================================================================
+   6. Left Sidebar & Categories (수채화 스케치북 사이드바)
+   ========================================================================== */
+.blog-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    position: sticky;
+    top: 92px;
+}
+
+.sidebar-widget {
+    background-color: rgba(255, 253, 249, 0.82);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1.5px solid var(--ink-border-light);
+    border-radius: var(--radius-organic-md);
+    padding: 24px;
+    box-shadow: var(--shadow-paper);
+    position: relative;
+    transition: var(--transition);
+}
+
+.sidebar-widget:hover {
+    box-shadow: var(--shadow-bleeding-card);
+}
+
+.widget-title {
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--ink-dark);
+    padding-bottom: 12px;
+    margin-bottom: 16px;
+    border-bottom: 1.5px solid var(--wash-sky);
+    position: relative;
+}
+
+.widget-title::after {
+    content: '';
+    position: absolute;
+    bottom: -1.5px;
+    left: 0;
+    width: 48px;
+    height: 2.5px;
+    background: linear-gradient(90deg, var(--pigment-sky), var(--pigment-lavender));
+    border-radius: var(--radius-full);
+}
+
+.widget-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.mini-avatar {
+    width: 46px;
+    height: 46px;
+    background: var(--wash-sky);
+    border: 1px solid rgba(175, 210, 245, 0.6);
+    border-radius: 48% 52% 56% 44% / 46% 48% 52% 54%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    box-shadow: 0 3px 8px rgba(180, 210, 240, 0.3);
+}
+
+.mini-info strong {
+    font-family: var(--font-heading);
+    font-size: 0.98rem;
+    color: var(--ink-dark);
+}
+
+.mini-info p {
+    font-size: 0.82rem;
+    color: var(--ink-muted);
+}
+
+.widget-desc {
+    font-size: 0.88rem;
+    color: var(--ink-muted);
+    line-height: 1.6;
+    word-break: keep-all;
+}
+
+/* Category List */
+.category-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.category-tree {
+    background-color: rgba(250, 247, 242, 0.9);
+    border: 1px solid var(--ink-border-light);
+    border-radius: var(--radius-organic-sm);
+    padding: 12px;
+    transition: var(--transition);
+}
+
+.category-tree:hover {
+    border-color: rgba(180, 205, 240, 0.8);
+    background-color: rgba(255, 253, 249, 0.95);
+}
+
+.tree-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.cat-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-heading);
+    font-size: 0.94rem;
+    font-weight: 700;
+    color: var(--ink-dark);
+    transition: var(--transition);
+}
+
+.cat-link:hover {
+    color: var(--pigment-sky);
+}
+
+.single-cat-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+    border-radius: var(--radius-organic-sm);
+    font-family: var(--font-heading);
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--ink-muted);
+    border: 1px solid transparent;
+    transition: var(--transition);
+}
+
+.single-cat-link:hover {
+    background-color: var(--wash-sky);
+    color: var(--ink-dark);
+    border-color: rgba(180, 215, 245, 0.6);
+    transform: translateX(3px);
+}
+
+.cat-icon {
+    font-size: 1rem;
+}
+
+/* 파스텔 수채화 카운트 배지 */
+.cat-count {
+    background-color: var(--wash-sky);
+    border: 1px solid rgba(175, 210, 245, 0.7);
+    color: var(--pigment-sky);
+    font-size: 0.74rem;
+    padding: 2px 8px;
+    border-radius: var(--radius-pill);
+    font-weight: 700;
+    box-shadow: 0 1px 4px rgba(180, 210, 245, 0.2);
+}
+
+/* Sub-category list */
+.sub-category-list {
+    list-style: none;
+    padding-left: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    border-left: 2px dashed rgba(180, 215, 245, 0.6);
+    margin-left: 10px;
+}
+
+.sub-cat-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    padding: 7px 10px;
+    border-radius: var(--radius-organic-sm);
+    font-size: 0.84rem;
+    font-weight: 500;
+    color: var(--ink-muted);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.sub-cat-btn:hover {
+    background-color: var(--wash-sky);
+    color: var(--ink-dark);
+    font-weight: 600;
+    transform: translateX(4px);
+}
+
+.sub-cat-btn.active {
+    background-color: var(--wash-sky);
+    color: var(--pigment-sky);
+    font-weight: 700;
+    box-shadow: inset 3px 0 0 var(--pigment-sky);
+}
+
+.sub-bullet {
+    font-size: 0.88rem;
+}
+
+/* ==========================================================================
+   7. Posts Feed & Common Post Card (물감 번짐 수채 카드)
+   ========================================================================== */
+.posts-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.section-heading {
+    margin-bottom: 8px;
+}
+
+.feed-title {
+    font-family: var(--font-heading);
+    font-size: 1.45rem;
+    font-weight: 700;
+    color: var(--ink-dark);
+    letter-spacing: -0.02em;
+}
+
+.feed-subtitle {
+    font-size: 0.9rem;
+    color: var(--ink-muted);
+}
+
+/* Post Card Common (수채화 캔버스 카드 & 블리딩 에지) */
+.post-card {
+    background: rgba(255, 253, 249, 0.84);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1.5px solid var(--ink-border-light);
+    border-radius: var(--radius-organic-lg);
+    padding: 32px 34px;
+    box-shadow: var(--shadow-bleeding-card);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+/* 블리딩 에지 워시 (호버 시 은은하게 확산) */
+.post-card::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    background: radial-gradient(circle at 10% 10%, rgba(220, 235, 255, 0.45) 0%, transparent 60%),
+                radial-gradient(circle at 90% 90%, rgba(255, 225, 220, 0.45) 0%, transparent 60%);
+    z-index: -1;
+    filter: blur(8px);
+    opacity: 0.6;
+    transition: var(--transition);
+}
+
+.post-card:hover {
+    box-shadow: var(--shadow-bleeding-hover);
+    transform: translateY(-3px);
+}
+
+.post-card:hover::before {
+    opacity: 1;
+    filter: blur(12px);
+}
+
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+/* 파스텔 수채 카테고리 배지 */
+.category-badge {
+    font-family: var(--font-heading);
+    font-size: 0.82rem;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: var(--radius-pill);
+    box-shadow: 0 2px 6px rgba(180, 165, 195, 0.2);
+    mix-blend-mode: multiply;
+}
+
+.category-blue {
+    background-color: var(--wash-sky);
+    color: var(--pigment-sky);
+    border: 1px solid rgba(175, 210, 245, 0.7);
+}
+
+.category-sky {
+    background-color: var(--wash-peach);
+    color: var(--pigment-peach);
+    border: 1px solid rgba(255, 205, 195, 0.7);
+}
+
+.category-teal {
+    background-color: var(--wash-sage);
+    color: var(--pigment-sage);
+    border: 1px solid rgba(190, 230, 205, 0.7);
+}
+
+.post-date {
+    font-family: var(--font-accent);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--ink-soft);
+    letter-spacing: 0.02em;
+}
+
+.post-title {
+    font-family: var(--font-heading);
+    font-size: 1.38rem;
+    font-weight: 700;
+    color: var(--ink-dark);
+    margin-bottom: 12px;
+    line-height: 1.45;
+    letter-spacing: -0.02em;
+}
+
+.post-excerpt {
+    font-size: 0.98rem;
+    color: var(--ink-muted);
+    line-height: 1.7;
+    margin-bottom: 24px;
+    word-break: keep-all;
+}
+
+.post-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 18px;
+    border-top: 1.5px dashed var(--ink-line);
+    font-size: 0.86rem;
+}
+
+.read-tag {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: var(--pigment-sky);
+}
+
+.post-stat {
+    font-family: var(--font-accent);
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+}
+
+/* ==========================================================================
+   8. Welfare Experience Gallery (수채화 4대 실천 경험 카드)
+   ========================================================================== */
+.welfare-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 18px 0 24px;
+}
+
+/* 수채화 스와치 필터 탭 버튼 */
+.tab-btn {
+    background-color: rgba(250, 246, 238, 0.9);
+    border: 1.5px solid var(--ink-border-light);
+    color: var(--ink-muted);
+    padding: 8px 18px;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-heading);
+    font-size: 0.86rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-bounce);
+    box-shadow: 0 2px 6px rgba(180, 160, 150, 0.1);
+}
+
+.tab-btn:hover {
+    color: var(--ink-dark);
+    background-color: var(--wash-sky);
+    border-color: rgba(175, 210, 245, 0.8);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 4px 14px rgba(180, 210, 245, 0.35);
+}
+
+/* 활성화된 탭: 깊고 투명한 수채화 워시 */
+.tab-btn.active {
+    background: linear-gradient(135deg, rgba(160, 205, 245, 0.95) 0%, rgba(200, 185, 245, 0.95) 100%);
+    color: var(--ink-dark);
+    border-color: rgba(145, 190, 235, 0.9);
+    box-shadow: 0 6px 18px rgba(175, 195, 240, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.7);
+    transform: translateY(-1px);
+}
+
+/* 4-Card Experience Grid */
+.experience-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+/* 4대 경험 카드: 수채화 화지 질감 & 소프트 블리딩 에지 */
+.exp-card {
+    background: rgba(255, 254, 251, 0.9);
+    backdrop-filter: blur(8px);
+    border: 1.5px solid var(--ink-border-light);
+    border-radius: var(--radius-organic-md);
+    padding: 24px;
+    box-shadow: var(--shadow-paper);
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    position: relative;
+    outline: none;
+    overflow: hidden;
+}
+
+/* 카드별 수채화 배경 틴트 레이어 */
+.exp-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    opacity: 0.45;
+    mix-blend-mode: multiply;
+    transition: var(--transition);
+    z-index: 0;
+}
+
+.exp-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* 1. 기획·운영: Sky Cornflower 워시 */
+#exp-planning::before {
+    background: radial-gradient(circle at 15% 15%, rgba(185, 225, 255, 0.6) 0%, rgba(220, 240, 255, 0.2) 60%, transparent 100%);
+}
+
+/* 2. 봉사·서포터즈: Peach Coral 워시 */
+#exp-volunteers::before {
+    background: radial-gradient(circle at 15% 15%, rgba(255, 215, 205, 0.6) 0%, rgba(255, 235, 225, 0.2) 60%, transparent 100%);
+}
+
+/* 3. 현장·사례관리: Lavender Lilac 워시 */
+#exp-casework::before {
+    background: radial-gradient(circle at 15% 15%, rgba(230, 210, 255, 0.6) 0%, rgba(240, 230, 255, 0.2) 60%, transparent 100%);
+}
+
+/* 4. 전문 역량: Sage Mint 워시 */
+#exp-competency::before {
+    background: radial-gradient(circle at 15% 15%, rgba(205, 240, 220, 0.6) 0%, rgba(225, 248, 235, 0.2) 60%, transparent 100%);
+}
+
+.exp-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-bleeding-hover);
+    border-color: rgba(180, 170, 210, 0.7);
+}
+
+.exp-card:hover::before {
+    opacity: 0.85;
+}
+
+/* 하이라이트 상태 */
+.exp-card.is-highlighted {
+    border-color: var(--pigment-sky);
+    box-shadow: 0 0 0 3px rgba(180, 215, 245, 0.5), var(--shadow-bleeding-hover);
+    transform: translateY(-5px);
+}
+
+.exp-card.is-hidden {
+    display: none;
+}
+
+.exp-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+/* 수채화 아이콘 방울 래퍼 */
+.exp-icon-wrap {
+    width: 44px;
+    height: 44px;
+    border-radius: 48% 52% 54% 46% / 46% 48% 52% 54%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    box-shadow: 0 3px 10px rgba(180, 165, 195, 0.25), inset 0 0 6px rgba(255, 255, 255, 0.8);
+    transition: var(--transition-bounce);
+}
+
+.exp-card:hover .exp-icon-wrap {
+    transform: rotate(6deg) scale(1.1);
+}
+
+.bg-blue { background-color: var(--wash-sky); border: 1px solid rgba(175, 210, 245, 0.8); }
+.bg-sky { background-color: var(--wash-peach); border: 1px solid rgba(255, 205, 195, 0.8); }
+.bg-indigo { background-color: var(--wash-lavender); border: 1px solid rgba(215, 195, 245, 0.8); }
+.bg-teal { background-color: var(--wash-sage); border: 1px solid rgba(190, 230, 205, 0.8); }
+
+.exp-badge {
+    font-family: var(--font-heading);
+    font-size: 0.76rem;
+    font-weight: 700;
+    color: var(--ink-dark);
+    background-color: rgba(255, 255, 255, 0.85);
+    border: 1px solid var(--ink-border-light);
+    padding: 3px 10px;
+    border-radius: var(--radius-pill);
+    box-shadow: 0 1px 4px rgba(180, 170, 160, 0.15);
+}
+
+.exp-title {
+    font-family: var(--font-heading);
+    font-size: 1.12rem;
+    font-weight: 700;
+    color: var(--ink-dark);
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+}
+
+.exp-summary {
+    font-size: 0.88rem;
+    color: var(--ink-muted);
+    line-height: 1.6;
+    margin-bottom: 16px;
+    word-break: keep-all;
+}
+
+/* 수채화 글레이징 하이라이트 박스 */
+.exp-highlights {
+    list-style: none;
+    margin-bottom: 18px;
+    padding: 12px 14px;
+    background-color: rgba(250, 247, 240, 0.75);
+    border-radius: var(--radius-organic-sm);
+    border-left: 3px solid var(--pigment-sky);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 0.82rem;
+    color: var(--ink-main);
+    line-height: 1.55;
+    box-shadow: inset 0 1px 4px rgba(180, 165, 150, 0.08);
+}
+
+#exp-planning .exp-highlights { border-left-color: var(--pigment-sky); }
+#exp-volunteers .exp-highlights { border-left-color: var(--pigment-peach); }
+#exp-casework .exp-highlights { border-left-color: var(--pigment-lavender); }
+#exp-competency .exp-highlights { border-left-color: var(--pigment-sage); }
+
+.exp-highlights li strong {
+    color: var(--ink-dark);
+}
+
+.exp-card-footer {
+    margin-top: auto;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* 수채화 디테일 뷰 버튼 */
+.exp-view-btn {
+    background: none;
+    border: none;
+    color: var(--ink-dark);
+    font-family: var(--font-heading);
+    font-size: 0.86rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: var(--radius-pill);
+    background-color: var(--wash-sky);
+    border: 1px solid rgba(175, 210, 245, 0.6);
+    transition: var(--transition-bounce);
+}
+
+.exp-view-btn:hover {
+    color: var(--pigment-sky);
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 4px 12px rgba(180, 210, 245, 0.4);
+    transform: translateX(3px);
+}
+
+/* ==========================================================================
+   9. Experience Detail Modal (수채화 스케치북 아트 모달)
+   ========================================================================== */
+.exp-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.exp-modal.is-open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(44, 51, 62, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.exp-dialog {
+    position: relative;
+    z-index: 1;
+    max-width: 640px;
+    width: 100%;
+    background: rgba(255, 254, 251, 0.95);
+    border: 2px solid var(--ink-border-light);
+    border-radius: var(--radius-organic-lg);
+    padding: 34px;
+    box-shadow: 0 25px 60px -10px rgba(35, 45, 60, 0.35), var(--shadow-bleeding-card);
+    transform: scale(0.92) translateY(10px);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.exp-modal.is-open .exp-dialog {
+    transform: scale(1) translateY(0);
+}
+
+.exp-modal-header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding-bottom: 18px;
+    border-bottom: 1.5px dashed var(--ink-line);
+    margin-bottom: 22px;
+}
+
+.exp-modal-icon-wrap {
+    width: 56px;
+    height: 56px;
+    border-radius: 48% 52% 54% 46% / 46% 48% 52% 54%;
+    background: var(--wash-sky);
+    border: 1px solid rgba(175, 210, 245, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    flex-shrink: 0;
+    box-shadow: 0 4px 14px rgba(180, 205, 235, 0.35);
+}
+
+.exp-modal-badge {
+    display: inline-block;
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--pigment-sky);
+    background: var(--wash-sky);
+    border: 1px solid rgba(175, 210, 245, 0.7);
+    padding: 3px 12px;
+    border-radius: var(--radius-pill);
+    margin-bottom: 6px;
+}
+
+.exp-modal-title {
+    font-family: var(--font-heading);
+    font-size: 1.45rem;
+    font-weight: 700;
+    color: var(--ink-dark);
+    letter-spacing: -0.02em;
+}
+
+.exp-modal-section {
+    margin-bottom: 20px;
+}
+
+.exp-modal-heading {
+    font-family: var(--font-heading);
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: var(--ink-dark);
+    margin-bottom: 10px;
+}
+
+.exp-modal-desc {
+    font-size: 0.94rem;
+    color: var(--ink-muted);
+    line-height: 1.7;
+    word-break: keep-all;
+}
+
+.exp-modal-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 0.92rem;
+    color: var(--ink-main);
+    line-height: 1.6;
+}
+
+.exp-modal-list li {
+    position: relative;
+    padding-left: 22px;
+}
+
+.exp-modal-list li::before {
+    content: "💧";
+    position: absolute;
+    left: 0;
+    font-size: 0.85rem;
+}
+
+.exp-review-box {
+    background: var(--wash-sky);
+    border: 1.5px solid rgba(175, 210, 245, 0.7);
+    border-radius: var(--radius-organic-md);
+    padding: 20px;
+    margin-bottom: 0;
+    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.6);
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    z-index: 2;
+    width: 38px;
+    height: 38px;
+    border-radius: var(--radius-full);
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--ink-dark);
+    border: 1px solid var(--ink-border-light);
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-bounce);
+    box-shadow: 0 2px 8px rgba(180, 160, 150, 0.2);
+}
+
+.modal-close-btn:hover {
+    background: var(--wash-peach);
+    color: var(--pigment-peach);
+    transform: scale(1.12) rotate(90deg);
+}
+
+/* ==========================================================================
+   10. Travel Photos Gallery & Lightbox Modal (여행 스케치 앨범)
+   ========================================================================== */
+.photo-action-area {
+    margin: 18px 0 24px;
+}
+
+/* 수채화 그라디언트 사진 토글 버튼 */
+.photo-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, rgba(160, 210, 250, 0.9) 0%, rgba(215, 185, 245, 0.9) 100%);
+    color: var(--ink-dark);
+    border: 1.5px solid rgba(170, 200, 240, 0.8);
+    padding: 12px 24px;
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    font-weight: 700;
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    box-shadow: var(--shadow-button-glow), inset 0 0 10px rgba(255, 255, 255, 0.7);
+    transition: var(--transition-bounce);
+}
+
+.photo-toggle-btn:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 26px rgba(170, 195, 245, 0.45);
+    background: linear-gradient(135deg, rgba(255, 205, 195, 0.95) 0%, rgba(215, 185, 245, 0.95) 100%);
+}
+
+.photo-toggle-btn .btn-arrow {
+    font-size: 0.78rem;
+    transition: transform 0.35s ease;
+}
+
+.photo-toggle-btn[aria-expanded="true"] .btn-arrow {
+    transform: rotate(180deg);
+}
+
+.travel-gallery {
+    background: rgba(255, 252, 247, 0.85);
+    border: 1.5px solid var(--ink-border-light);
+    border-radius: var(--radius-organic-md);
+    padding: 22px;
+    margin-bottom: 24px;
+    animation: fadeInSlide 0.4s ease forwards;
+    box-shadow: inset 0 0 14px rgba(255, 255, 255, 0.8);
+}
+
+.travel-gallery[hidden] {
+    display: none !important;
+}
+
+@keyframes fadeInSlide {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.gallery-info {
+    font-family: var(--font-heading);
+    font-size: 0.86rem;
+    color: var(--pigment-sky);
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+/* 수채화 액자 느낌의 갤러리 카드 */
+.gallery-card {
+    background: #ffffff;
+    border: 1.5px solid var(--ink-border-light);
+    border-radius: var(--radius-organic-sm);
+    overflow: hidden;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    padding: 6px;
+    box-shadow: 0 4px 14px rgba(180, 165, 150, 0.15);
+}
+
+.gallery-card:hover {
+    transform: translateY(-5px) rotate(1deg);
+    box-shadow: var(--shadow-bleeding-hover);
+    border-color: rgba(180, 165, 210, 0.8);
+}
+
+.gallery-card .img-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: 8px;
+    background-color: var(--paper-warm);
+}
+
+.gallery-card .img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.gallery-card:hover .img-container img {
+    transform: scale(1.08);
+}
+
+.zoom-badge {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    background: rgba(44, 51, 62, 0.75);
+    color: #ffffff;
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    transform: translateY(4px);
+    transition: var(--transition);
+}
+
+.gallery-card:hover .zoom-badge {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.gallery-card figcaption {
+    padding: 10px 8px 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.place-name {
+    font-family: var(--font-heading);
+    font-size: 0.94rem;
+    color: var(--ink-dark);
+    font-weight: 700;
+}
+
+.place-sub {
+    font-size: 0.8rem;
+    color: var(--ink-muted);
+}
+
+/* Lightbox Photo Modal */
+.photo-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.photo-modal.is-open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-dialog {
+    position: relative;
+    z-index: 1;
+    max-width: 820px;
+    width: 100%;
+    background: rgba(255, 254, 252, 0.98);
+    border: 2px solid var(--ink-border-light);
+    border-radius: var(--radius-organic-md);
+    overflow: hidden;
+    box-shadow: 0 25px 60px -10px rgba(35, 45, 60, 0.45);
+    transform: scale(0.92);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.photo-modal.is-open .modal-dialog {
+    transform: scale(1);
+}
+
+.modal-image-wrapper {
+    width: 100%;
+    max-height: 65vh;
+    background: #1c222b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-image {
+    max-width: 100%;
+    max-height: 65vh;
+    object-fit: contain;
+    display: block;
+}
+
+.modal-info {
+    padding: 20px 28px;
+    background: #ffffff;
+}
+
+.modal-title {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--ink-dark);
+    margin-bottom: 4px;
+}
+
+.modal-desc {
+    font-size: 0.92rem;
+    color: var(--ink-muted);
+}
+
+/* ==========================================================================
+   11. Footer
+   ========================================================================== */
+.blog-footer {
+    border-top: 1.5px solid var(--ink-border-light);
+    background-color: rgba(253, 251, 247, 0.85);
+    backdrop-filter: blur(10px);
+    text-align: center;
+    padding: 32px 24px;
+    font-family: var(--font-heading);
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    margin-top: 50px;
+    position: relative;
+    z-index: 1;
+}
+
+/* ==========================================================================
+   12. Responsive Design (모바일 & 태블릿 최적화)
+   ========================================================================== */
+@media (max-width: 880px) {
+    .main-content {
+        grid-template-columns: 1fr;
+    }
+
+    .blog-sidebar {
+        position: static;
+    }
+
+    .hero-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 28px 24px;
+    }
+
+    .hero-tags {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 640px) {
+    .experience-gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .exp-dialog {
+        padding: 22px;
+    }
+
+    .profile-name {
+        font-size: 1.7rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-inner {
+        padding: 14px 18px;
+    }
+
+    .brand-title {
+        font-size: 1.05rem;
+    }
+
+    .nav-link {
+        padding: 5px 12px;
+        font-size: 0.86rem;
+    }
+
+    .layout-container {
+        padding: 24px 16px 48px;
+    }
+
+    .post-card {
+        padding: 22px 18px;
+    }
+
+    .post-title {
+        font-size: 1.2rem;
+    }
+}
+
+/* ==========================================================================
+   13. Watercolor Ripple Micro-Interaction (수채 물방울 번짐 인터랙션)
+   ========================================================================== */
+.water-ripple {
+    position: absolute;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    animation: waterRippleAnim 0.75s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+    pointer-events: none;
+    background: radial-gradient(circle, rgba(160, 205, 245, 0.65) 0%, rgba(215, 185, 245, 0.35) 45%, transparent 75%);
+    mix-blend-mode: multiply;
+    z-index: 10;
+}
+
+@keyframes waterRippleAnim {
+    0% {
+        width: 0;
+        height: 0;
+        opacity: 0.85;
+        transform: translate(-50%, -50%) scale(0);
+    }
+    100% {
+        width: 190px;
+        height: 190px;
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
